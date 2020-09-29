@@ -1,0 +1,3 @@
+MOV DI,1253h
+SHR DI,1
+

@@ -1,0 +1,75 @@
+
+; You may customize this and other start-up templates;
+; The location of this template is c:\emu8086\inc\0_com_template.txt
+
+org 100h
+
+.MODEL SMALL
+.STACK 100h
+.DATA
+MSG1 DB "Choose the correct choice from the given options $"
+MSG2 DB 0Ah,"Q: 2's Complement of 20h Is:$"
+MSG3 DB "Choices are 1.20h 2.60h 3.80h 4.E0h $"
+WRONG DB "Wrong Answer $"
+CORRECT DB "Correct Answer $"
+.CODE
+MAIN PROC
+MOV AX,@DATA
+MOV DX,AX
+
+
+
+
+DISP_MS:
+MOV AH,9
+LEA DX,MSG1
+INT 21h
+MOV AH,9
+LEA DX,MSG2
+INT 21h
+MOV AH,9
+LEA DX,MSG3
+INT 21h
+JMP INPUT
+
+
+INPUT:
+MOV AH,1
+INT 21h
+MOV DL,AL
+JMP CHECK
+
+CHECK:
+CMP DL,31h
+JZ CORRECT_PRINT
+JNZ WRONG_PRINT
+
+WRONG_PRINT:
+MOV AH,9
+LEA DX,WRONG
+INT 21h
+JMP TERMINATE
+CORRECT_PRINT:
+MOV AH,9
+LEA DX,CORRECT
+INT 21h
+JMP TERMINATE
+
+TERMINATE:
+MOV AH,4Ch
+INT 21h
+
+
+ENDP
+END MAIN
+
+ret
+
+
+
+
+
+
+
+
+; [SOURCE]: C:\Users\Bilal\Desktop\final.asm

@@ -1,0 +1,41 @@
+.MODEL SMALL
+.STACK 100h
+.DATA
+    MSG1 DB 'ENTER TWO DIGIT VALUE FOR DIVIDEND: $'
+    MSG2 DB 0Dh, 0Ah,'ENETR SINGLE DIGIT VALUE FOR DIVISOR: $'
+    MSG3 DB 0Dh, 0Ah,'THE QUOTIENT IS: '
+    QUOT DW ?,'$'
+.CODE
+MAIN PROC
+    MOV  AX , @DATA
+    MOV  DS , AX
+    LEA DX,MSG1
+    MOV AH,9
+    INT 21h
+    MOV AH,1
+    INT 21h
+    MOV BH,AL
+    INT 21h
+    MOV BL,AL
+    LEA DX,MSG2
+    MOV AH,9
+    INT 21h
+    MOV AH,1
+    INT 21h
+    MOV CL,AL
+    SUB BX,3030h
+    MOV AX,BX
+    AAD
+    SUB CL,30h
+    DIV CL
+    AAM
+    ADD AX,3030h
+    XCHG AL,AH
+    MOV QUOT,AX
+    LEA DX,MSG3
+    MOV AH,9
+    INT 21h
+    MOV  AH , 4Ch
+    INT  21h
+    MAIN  ENDP
+END  MAIN

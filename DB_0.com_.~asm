@@ -1,0 +1,33 @@
+
+; You may customize this and other start-up templates;
+; The location of this template is c:\emu8086\inc\0_com_template.txt
+
+org 100h
+
+.MODEL SMALL
+.STACK 100h
+.DATA
+NAME DB ?,"$"
+
+.CODE
+MAIN PROC
+MOV AX,@DATA
+MOV DX,AX
+
+MOV AH,9
+MOV DX,00FEh
+INT 21h
+
+ENDP
+END MAIN
+
+ret
+
+
+
+
+
+
+
+
+; [SOURCE]: E:\8086LIBS\DisplayName.asm

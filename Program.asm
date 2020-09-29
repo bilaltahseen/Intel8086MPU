@@ -1,0 +1,23 @@
+.MODEL SMALL
+
+.STACK 200h
+
+.DATA
+MSG1 DB "Hello World! $"
+
+.CODE
+MAIN    PROC
+
+MOV AX,@DATA
+MOV DX,AX
+
+LEA DX,MSG1
+MOV AH,9
+INT 21H
+
+
+MAIN    ENDP
+
+END MAIN
+
+
